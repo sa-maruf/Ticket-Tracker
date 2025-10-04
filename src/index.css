@@ -2,12 +2,12 @@
 @plugin "daisyui";
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-body{
+body {
     font-family: "Inter", sans-serif;
     list-style: none;
 }
 
-.box-aa{
+.box-aa {
     background-image: url(../src/assets/vector1.png);
     background-repeat: no-repeat;
 }

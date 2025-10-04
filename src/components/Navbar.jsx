@@ -2,8 +2,17 @@ import { useState } from "react";
 import { FaBars } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
 
-const Nav = () => {
+const Navbar = () => {
     const [mobileIcon, setMobileIcon] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useState(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        }
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [])
 
     const mobileIconClick = () => {
         setMobileIcon(!mobileIcon)
@@ -11,7 +20,7 @@ const Nav = () => {
 
     return (
         <>
-            <nav className='bg-[#FFFFFF] text-black border-b-1 border-gray-300'>
+            <nav className={`bg-[#FFFFFF] text-black border-b-1 border-gray-300 fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? "bg-black/2 backdrop-blur-lg shadow-md" : null}`}>
                 <section className='max-w-screen-2xl mx-auto p-4 flex justify-between items-center'>
                     <div className="flex items-center gap-4">
                         <button onClick={mobileIconClick} className="text-2xl text-[#632EE3] md:hidden">
@@ -37,7 +46,7 @@ const Nav = () => {
                 {/* Mobile menu  */}
                 <section className={`${mobileIcon ? "block" : "hidden"}`}>
                     <div className="w-full p-4 md:hidden absolute">
-                        <div className="bg-[#FFFFFF] w-10/12 mx-auto rounded-md">
+                        <div className="bg-[#FFFFFF] mx-auto rounded-md">
                             <ul className="p-4 space-y-2 text-center">
                                 <li className="bg-[#e6e7eb] rounded-sm py-1"><a href="">Home</a></li>
                                 <li className="bg-[#e6e7eb] rounded-sm py-1"><a href="">FAQ</a></li>
@@ -54,4 +63,4 @@ const Nav = () => {
     )
 }
 
-export default Nav;
+export default Navbar;
